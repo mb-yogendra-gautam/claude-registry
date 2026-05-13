@@ -1,0 +1,11 @@
+{
+  "id": "pdf-summarizer",
+  "name": "PDF Summarizer",
+  "version": "1.0.0",
+  "description": "Extract text from a PDF and produce a structured bullet-point summary with key entities and dates.",
+  "author": "claude-registry",
+  "license": "MIT",
+  "tags": ["pdf", "summarization", "documents"],
+  "entrypoint": "SKILL.md",
+  "files": ["SKILL.md", "scripts/extract.py"]
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCP Server Manifest",
+  "description": "Manifest describing an MCP server in the registry",
+  "type": "object",
+  "required": ["id", "name", "version", "description", "author", "runtime", "config_template"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+    },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z0-9.]+)?$"
+    },
+    "description": { "type": "string", "minLength": 10, "maxLength": 500 },
+    "author": { "type": "string", "minLength": 1 },
+    "homepage": { "type": "string", "format": "uri" },
+    "license": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "maxItems": 10
+    },
+    "runtime": {
+      "type": "string",
+      "enum": ["node", "python", "binary", "docker"],
+      "description": "How the server is executed"
+    },
+    "install": {
+      "type": "object",
+      "description": "Installation hints. For 'node' with npx or 'python' with uvx, this can be omitted since the package is fetched at runtime.",
+      "properties": {
+        "npm_package": { "type": "string" },
+        "pip_package": { "type": "string" },
+        "binary_url": { "type": "string", "format": "uri" },
+        "binary_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "docker_image": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "config_template": {
+      "type": "object",
+      "description": "Snippet merged into claude_desktop_config.json's mcpServers section",
+      "required": ["command"],
+      "properties": {
+        "command": { "type": "string" },
+        "args": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "env": {
+          "type": "object",
+          "description": "Environment variables. Values containing '<...>' are placeholders the user must fill in.",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "required_env": {
+      "type": "array",
+      "description": "Environment variables the user must provide, with descriptions",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "secret": { "type": "boolean", "default": false },
+          "example": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "min_claude_version": { "type": "string" }
+  },
+  "additionalProperties": false
+}

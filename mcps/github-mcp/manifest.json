@@ -1,0 +1,29 @@
+{
+  "id": "github-mcp",
+  "name": "GitHub",
+  "version": "0.4.1",
+  "description": "Query GitHub repos, issues, pull requests, and code from Claude. Read-only by default.",
+  "author": "modelcontextprotocol",
+  "homepage": "https://github.com/modelcontextprotocol/servers",
+  "license": "MIT",
+  "tags": ["github", "git", "code"],
+  "runtime": "node",
+  "install": {
+    "npm_package": "@modelcontextprotocol/server-github"
+  },
+  "config_template": {
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-github"],
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "<GITHUB_PERSONAL_ACCESS_TOKEN>"
+    }
+  },
+  "required_env": [
+    {
+      "name": "GITHUB_PERSONAL_ACCESS_TOKEN",
+      "description": "Personal access token. Create at github.com/settings/tokens with 'repo' scope.",
+      "secret": true,
+      "example": "ghp_xxxxxxxxxxxxxxxxxxxx"
+    }
+  ]
+}

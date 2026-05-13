@@ -1,0 +1,26 @@
+{
+  "id": "filesystem-mcp",
+  "name": "Filesystem",
+  "version": "0.6.2",
+  "description": "Give Claude read/write access to specific directories on your machine.",
+  "author": "modelcontextprotocol",
+  "homepage": "https://github.com/modelcontextprotocol/servers",
+  "license": "MIT",
+  "tags": ["filesystem", "files"],
+  "runtime": "node",
+  "install": {
+    "npm_package": "@modelcontextprotocol/server-filesystem"
+  },
+  "config_template": {
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "<ALLOWED_DIR>"]
+  },
+  "required_env": [
+    {
+      "name": "ALLOWED_DIR",
+      "description": "Absolute path of a directory Claude is allowed to access. Will be substituted into args.",
+      "secret": false,
+      "example": "/Users/you/Documents/claude-workspace"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-05-13T11:06:42+00:00",
+  "skills": [
+    {
+      "id": "csv-cleaner",
+      "name": "CSV Cleaner",
+      "version": "0.1.0",
+      "description": "Clean messy CSVs: normalize headers, trim whitespace, infer types, flag suspect rows.",
+      "author": "claude-registry",
+      "tags": [
+        "csv",
+        "data-cleaning"
+      ],
+      "license": "MIT",
+      "path": "skills/csv-cleaner"
+    },
+    {
+      "id": "pdf-summarizer",
+      "name": "PDF Summarizer",
+      "version": "1.0.0",
+      "description": "Extract text from a PDF and produce a structured bullet-point summary with key entities and dates.",
+      "author": "claude-registry",
+      "tags": [
+        "pdf",
+        "summarization",
+        "documents"
+      ],
+      "license": "MIT",
+      "path": "skills/pdf-summarizer"
+    }
+  ],
+  "mcps": [
+    {
+      "id": "filesystem-mcp",
+      "name": "Filesystem",
+      "version": "0.6.2",
+      "description": "Give Claude read/write access to specific directories on your machine.",
+      "author": "modelcontextprotocol",
+      "tags": [
+        "filesystem",
+        "files"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "runtime": "node",
+      "path": "mcps/filesystem-mcp"
+    },
+    {
+      "id": "github-mcp",
+      "name": "GitHub",
+      "version": "0.4.1",
+      "description": "Query GitHub repos, issues, pull requests, and code from Claude. Read-only by default.",
+      "author": "modelcontextprotocol",
+      "tags": [
+        "github",
+        "git",
+        "code"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/modelcontextprotocol/servers",
+      "runtime": "node",
+      "path": "mcps/github-mcp"
+    }
+  ]
+}

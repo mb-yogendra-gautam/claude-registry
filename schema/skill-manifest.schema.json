@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Skill Manifest",
+  "description": "Manifest describing a Claude skill in the registry",
+  "type": "object",
+  "required": ["id", "name", "version", "description", "author", "entrypoint"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$",
+      "description": "Unique identifier (lowercase, hyphens). Must match folder name."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z0-9.]+)?$",
+      "description": "Semver version, e.g. 1.2.0 or 1.2.0-beta.1"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 500,
+      "description": "Short description shown in the catalog"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1
+    },
+    "homepage": { "type": "string", "format": "uri" },
+    "license": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "maxItems": 10
+    },
+    "entrypoint": {
+      "type": "string",
+      "description": "Relative path to SKILL.md within the skill folder",
+      "default": "SKILL.md"
+    },
+    "files": {
+      "type": "array",
+      "description": "Files to copy on install (relative to the skill folder). If omitted, all files are copied.",
+      "items": { "type": "string" }
+    },
+    "min_claude_version": {
+      "type": "string",
+      "description": "Minimum Claude Desktop version this skill supports"
+    }
+  },
+  "additionalProperties": false
+}

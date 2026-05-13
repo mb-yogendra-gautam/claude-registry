@@ -1,0 +1,10 @@
+{
+  "id": "csv-cleaner",
+  "name": "CSV Cleaner",
+  "version": "0.1.0",
+  "description": "Clean messy CSVs: normalize headers, trim whitespace, infer types, flag suspect rows.",
+  "author": "claude-registry",
+  "license": "MIT",
+  "tags": ["csv", "data-cleaning"],
+  "entrypoint": "SKILL.md"
+}
