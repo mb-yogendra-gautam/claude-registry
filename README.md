@@ -64,6 +64,6 @@ cli/            The uv-installable Python CLI
 Set `CLAUDE_REGISTRY_URL` to your fork's raw URL:
 
 ```bash
-export CLAUDE_REGISTRY_URL=https://raw.githubusercontent.com/YOU/your-fork/main
+export CLAUDE_REGISTRY_URL=https://raw.githubusercontent.com/mb-yogendra-gautam/claude-registry/refs/heads/main/index.json
 claude-registry list
 ```
