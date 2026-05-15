@@ -1,0 +1,17 @@
+[project]
+name = "registry-mcp"
+version = "0.1.0"
+description = "MCP server for browsing and installing Claude skills and MCPs from a registry"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+    "mcp>=1.0",
+    "requests>=2.31",
+]
+
+[project.scripts]
+registry-mcp = "registry_mcp.server:main_sync"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
