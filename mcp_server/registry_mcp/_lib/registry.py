@@ -7,7 +7,6 @@ from dataclasses import dataclass
 
 import requests
 
-# Override via env var for testing or self-hosting a fork.
 DEFAULT_REGISTRY = "https://raw.githubusercontent.com/mb-yogendra-gautam/claude-registry/main"
 
 
@@ -24,7 +23,7 @@ def _headers() -> dict[str, str]:
 
 @dataclass
 class CatalogEntry:
-    kind: str  # "skill" or "mcp"
+    kind: str
     id: str
     name: str
     version: str
