@@ -5,11 +5,12 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("registry-mcp")
 
-from .tools import catalog, install_mcp, install_skill, manage, setup  # noqa: E402
+from .tools import catalog, export_skill, install_mcp, install_skill, manage, setup  # noqa: E402
 
 catalog.register(mcp)
 install_skill.register(mcp)
 install_mcp.register(mcp)
+export_skill.register(mcp)
 manage.register(mcp)
 setup.register(mcp)
 
