@@ -4,40 +4,55 @@ A curated catalog of skills and MCP servers for Claude Desktop, with a CLI insta
 
 ## Getting started
 
-### 1. Install uv
+### Quick Start (Bootstrap Installer)
+
+Run the bootstrap script to add the Registry MCP server to Claude Desktop:
+
+```bash
+curl -sL https://raw.githubusercontent.com/mb-yogendra-gautam/claude-registry/main/scripts/bootstrap.py | python3
+```
+
+This installs `uv` (if missing) and registers the Registry MCP in your Claude Desktop config. After running it:
+
+1. Restart Claude Desktop.
+2. Ask Claude: "What skills and MCPs are available?"
+3. Ask Claude to install whichever MCP you want — it handles the rest conversationally.
+
+### CLI Installation (Advanced)
+
+#### 1. Install uv
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### 2. Install the CLI
+#### 2. Install the CLI
 
 ```bash
 uv tool install ./cli
 ```
 
-### 3. Browse available skills and MCPs
-
-```bash
-claude-registry list
-```
-
-### 4. Install a skill or MCP
+#### 3. Install a skill or MCP
 
 ```bash
 claude-registry install skill pdf-summarizer
 claude-registry install mcp github-mcp
 ```
 
-### 5. Check what's installed
+The CLI will prompt for any required environment variables (API keys, tokens, etc.) and write the config automatically.
 
-```bash
-claude-registry installed
-```
-
-### 6. Restart Claude Desktop
+#### 4. Restart Claude Desktop
 
 Restart Claude Desktop to pick up newly installed skills and MCPs.
+
+## Useful CLI commands
+
+| Command | Description |
+|---------|-------------|
+| `claude-registry list` | Browse all available skills and MCPs |
+| `claude-registry search <keyword>` | Search the registry |
+| `claude-registry installed` | See what's currently installed |
+| `claude-registry uninstall mcp <id>` | Remove an installed MCP |
 
 ## For contributors
 
