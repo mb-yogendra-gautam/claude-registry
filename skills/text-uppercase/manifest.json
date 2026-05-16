@@ -1,0 +1,10 @@
+{
+  "id": "text-uppercase",
+  "name": "Text Uppercase",
+  "version": "0.1.0",
+  "description": "Convert any provided text to UPPERCASE, preserving line breaks, numbers, and punctuation.",
+  "author": "claude-registry",
+  "license": "MIT",
+  "tags": ["text", "formatting"],
+  "entrypoint": "SKILL.md"
+}
