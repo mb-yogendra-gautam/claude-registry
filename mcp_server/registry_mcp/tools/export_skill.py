@@ -2,20 +2,12 @@
 from __future__ import annotations
 
 import base64
-import io
 import json
-import zipfile
 from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 
-from .._lib import registry
-
-
-def _files_to_export(manifest: dict) -> list[str]:
-    if "files" in manifest:
-        return manifest["files"]
-    return [manifest.get("entrypoint", "SKILL.md")]
+from .._lib import packaging, registry
 
 
 def register(mcp: FastMCP):
@@ -46,20 +38,11 @@ def register(mcp: FastMCP):
         except Exception as e:
             return json.dumps({"success": False, "error": "network_error", "message": str(e)})
 
-        files = _files_to_export(manifest)
-        buf = io.BytesIO()
-        included_files = []
         try:
-            with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
-                for rel in files:
-                    content = registry.fetch_file(entry.path, rel)
-                    arcname = f"{skill_id}/{rel}"
-                    zf.writestr(arcname, content)
-                    included_files.append(rel)
+            zip_bytes, included_files = packaging.build_skill_zip(entry, manifest)
         except Exception as e:
             return json.dumps({"success": False, "error": "download_error", "message": str(e)})
 
-        zip_bytes = buf.getvalue()
         zip_b64 = base64.b64encode(zip_bytes).decode("ascii")
 
         saved_path = None

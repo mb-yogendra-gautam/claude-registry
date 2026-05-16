@@ -29,3 +29,7 @@ def claude_skills_dir() -> Path:
 
 def registry_state_dir() -> Path:
     return claude_config_dir() / "registry"
+
+
+def downloads_dir() -> Path:
+    return Path.home() / "Downloads"
