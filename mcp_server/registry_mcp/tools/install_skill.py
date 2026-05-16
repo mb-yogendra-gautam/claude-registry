@@ -9,12 +9,6 @@ from mcp.server.fastmcp import FastMCP
 from .._lib import packaging, paths, registry, state
 
 
-def _files_to_install(manifest: dict) -> list[str]:
-    if "files" in manifest:
-        return manifest["files"]
-    return [manifest.get("entrypoint", "SKILL.md")]
-
-
 def register(mcp: FastMCP):
 
     @mcp.tool()
@@ -49,13 +43,17 @@ def register(mcp: FastMCP):
         except Exception as e:
             return json.dumps({"success": False, "error": "network_error", "message": str(e)})
 
+        if platform not in ("desktop", "cli"):
+            return json.dumps({"success": False, "error": "invalid_parameter",
+                               "message": f"Invalid platform '{platform}'. Must be 'desktop' or 'cli'."})
+
         if platform == "desktop":
             return _install_desktop(entry, manifest, skill_id, force)
 
         return _install_cli(entry, manifest, skill_id, force)
 
 
-def _install_desktop(entry, manifest: dict, skill_id: str, force: bool) -> str:
+def _install_desktop(entry: registry.CatalogEntry, manifest: dict, skill_id: str, force: bool) -> str:
     downloads = paths.downloads_dir()
     zip_path = downloads / f"{skill_id}.zip"
 
@@ -94,7 +92,7 @@ def _install_desktop(entry, manifest: dict, skill_id: str, force: bool) -> str:
     })
 
 
-def _install_cli(entry, manifest: dict, skill_id: str, force: bool) -> str:
+def _install_cli(entry: registry.CatalogEntry, manifest: dict, skill_id: str, force: bool) -> str:
     dest = paths.claude_skills_dir() / skill_id
     if dest.exists() and not force:
         return json.dumps({
@@ -107,7 +105,7 @@ def _install_cli(entry, manifest: dict, skill_id: str, force: bool) -> str:
         shutil.rmtree(dest)
     dest.mkdir(parents=True, exist_ok=True)
 
-    files = _files_to_install(manifest)
+    files = packaging.files_to_install(manifest)
     installed_files = []
     try:
         for rel in files:
